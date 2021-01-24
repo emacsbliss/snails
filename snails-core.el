@@ -785,8 +785,8 @@ or set it with any string you want."
       ;; so has to disable this for now
 
       ;; Focus out to hide snails frame on Mac.
-      (when (featurep 'cocoa)
-        (add-hook 'after-focus-change-function 'snails-quit))
+      ;; (when (featurep 'cocoa)
+      ;;   (add-hook 'after-focus-change-function 'snails-quit))
       )
 
     ;; Show popup frame.
