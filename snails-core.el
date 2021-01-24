@@ -761,9 +761,33 @@ or set it with any string you want."
       (unless snails-default-show-prefix-tips
         (snails-toggle-prefix-tips-buffer))
 
+      ;; NOTE: after-focus-change-function already has value in my config
+      ;; properly somewhere from doom emacs:
+      ;; [128 "\300\302\"\300\301\"\210\207"
+      ;; [apply posframe--redirect-posframe-focus
+      ;;        #[128 "\300\302\"\300\301\"\210\207"
+      ;;              [apply
+      ;;               #[0 "\300 \205 \301 \207"
+      ;;                   [frame-focus-state doom-modeline-update-env]
+      ;;                   1]
+      ;;               #[128 "\300\302\"\300\301\"\210\207"
+      ;;                     [apply doom-modeline-focus-change
+      ;;                            #[128 "\300\302\"\300\301\"\210\207"
+      ;;                                  [apply doom-modeline-refresh-frame ignore nil]
+      ;;                                  5 nil nil]
+      ;;                            nil]
+      ;;                     5 nil nil]
+      ;;               nil]
+      ;;              5 nil nil]
+      ;;        nil]
+      ;; 5 nil nil]
+      ;; by adding snails-quit to it, Emacs will complain
+      ;; so has to disable this for now
+
       ;; Focus out to hide snails frame on Mac.
       (when (featurep 'cocoa)
-        (add-hook 'after-focus-change-function 'snails-quit)))
+        (add-hook 'after-focus-change-function 'snails-quit))
+      )
 
     ;; Show popup frame.
     ;; `select-frame-set-input-focus' is necessary for gnome-shell DE.
